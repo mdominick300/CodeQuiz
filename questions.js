@@ -1,18 +1,13 @@
 var questions = [
     {
-      title: "Commonly used data types DO NOT include:",
-      choices: ["strings", "booleans", "alerts", "numbers"],
-      answer: "alerts"
+        title: "Commonly used data types DO NOT include:",
+        choices: ["strings", "booleans", "alerts", "numbers"],
+        answer: "2"
     },
     {
-      title: "The condition in an if / else statement is enclosed within ____.",
-      choices: ["quotes", "curly brackets", "parentheses", "square brackets"],
-      answer: "parentheses"
-    },
-    {
-        title: "",
-        choices: [],
-        answer: ""
+        title: "The condition in an if / else statement is enclosed within ____.",
+        choices: ["quotes", "curly brackets", "parentheses", "square brackets"],
+        answer: "parenthese2"
     },
     {
         title: "",
@@ -39,55 +34,63 @@ var questions = [
         choices: [],
         answer: ""
     },
-  ];
-  var button1 = document.querySelector("#button1");
+    {
+        title: "",
+        choices: [],
+        answer: ""
+    },
+];
+var button1 = document.querySelector("#button1");
+var nextQuestion = 0;
+var time;
+var totalQuestions = questions.length;
+var title1 = document.querySelector(".question");
+var answer1 = document.querySelector(".answer1");
+var answer2 = document.querySelector(".answer2");
+var answer3 = document.querySelector(".answer3");
+var answer4 = document.querySelector(".answer4");
+var questionContainer = document.querySelector("#questioncontainer");
+var startbutton = document.querySelector("#startbutton");
 
-  var time;
-  var totalQuestions= questions.length;
-  var title1 = document.querySelector(".question");
-  var answer1 = document.querySelector(".answer1");
-  var answer2 = document.querySelector(".answer2");
-  var answer3 = document.querySelector(".answer3");
-  var answer4 = document.querySelector(".answer4");
-  var questionContainer = document.querySelector("#questioncontainer");
-  var startbutton = document.querySelector("#startbutton");
-  
 
-function start(){
+function start() {
     button1.addEventListener("click", startbuttonclick);
     var buttonArrays = document.querySelectorAll(".answerB");
-    for (var i =0; i < buttonArrays.length-1; i++ ){
+    for (var i = 0; i < buttonArrays.length; i++) {
         buttonArrays[i].addEventListener("click", answerClick);
     }
 }
-  function newQuestion(){
-     for (var i =0; i < questions.length-1; i++ ){
-             title1.innerText = questions[i].title;
-            answer1.innerText = questions[i].choices[0];
-             answer2.innerText = questions[i].choices[1];
-             answer3.innerText = questions[i].choices[2];
-             answer4.innerText = questions[i].choices[3];
-             }
-         if (choices !== answer) {
-            alert="Incorrect";
-            time = time - 3;
-         }
+function newQuestion() {
+    
+        title1.innerText = questions[nextQuestion].title;
+        answer1.innerText = questions[nextQuestion].choices[0];
+        answer2.innerText = questions[nextQuestion].choices[1];
+        answer3.innerText = questions[nextQuestion].choices[2];
+        answer4.innerText = questions[nextQuestion].choices[3];
+    
 
-        //  question.addEventListener("submit", function(event) {}
-        }
+}
 
-
-function startbuttonclick(){
+function startbuttonclick() {
     questionContainer.classList.remove('hidden');
     startbutton.classList.add('hidden');
 }
-function answerClick(){
- console.log()
-}
+    function answerClick(event) {
+        console.log(this);
+        nextQuestion++;
+        // var value = event
+        // if (value !== questions.answer.value){
+        //     alert("Incorrect");
+        // } else{
+        newQuestion();
+    }
 
-start();
 
-      
+
+    start();
+    
+
+
 
 
 
