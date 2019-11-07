@@ -1,18 +1,19 @@
 .box {
     margin-top: 100px;
-    padding: 0 40px 100px 40px;
+    padding: 0 40px 40px 40px;
     text-align: center;
-    border: solid 2px purple;
+    border: solid 2px  rgb(89, 89, 255);
     position: relative;
     float: left;
     width: 100%;
     clear: both;
+    height: 400px;
 
 }
 #button1 {
     margin-top:60px;
     padding: 20px;
-    background-color: purple;
+    background-color: rgb(89, 89, 255);
     color: white;
     font-size: 60px;
     text-decoration: none;
@@ -26,7 +27,7 @@ h1 {
 
 .answer1, .answer2, .answer3, .answer4 {
     padding:  5px 20px 5px 20px;
-    background: purple;
+    background: rgb(89, 89, 255);
     color: white;
     margin: 10px;
     border-radius: 10px;
@@ -38,4 +39,8 @@ h1 {
 }
 .hidden{
     display: none;
+}
+
+#time{
+    font-size: 30px;
 }

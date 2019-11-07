@@ -38,21 +38,34 @@
     </div>
     <div class="container hidden" id="questioncontainer">
         <div class="row">
-            <div class="col-md-2"></div>
+            <div id ="time" class="col-md-2"></div>
             <div class="col-md-8 box">
                 <br>
                 <br>
-                <span id="q" class="row question">Commonly used data types DO NOT include:</span>
+                <span id="q" class="row question"></span>
                 <br>
-                <button class="row answer1 answerB">1. strings</button>
-                <button class="row answer2 answerB">2. boleans</button>
-                <button class="row answer3 answerB">3. alerts</button>
-                <button class="row answer4 answerB">4. numbers</button>
+                <button id="0" class="row answer1 answerB"></button>
+                <button id="1" class="row answer2 answerB"></button>
+                <button id="2" class="row answer3 answerB"></button>
+                <button id="3" class="row answer4 answerB"></button>
+                <spank id="incorrect"></span>
             </div>
             <div class="col-md-2"></div>
         </div>
 
     </div>
+    <div class="container hidden" id="finishcontainer">
+            <div class="row">
+                <div id ="time" class="col-md-2"></div>
+                <div class="col-md-8 box">
+                    <br>
+                    <h1>Score: </h1>
+                    <p id="endScore"></p>
+                </div>
+                <div class="col-md-2"></div>
+            </div>
+    
+        </div>
     <script src="./questions.js"></script>
 </body>
 

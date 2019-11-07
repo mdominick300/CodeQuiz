@@ -1,48 +1,49 @@
 var questions = [
     {
         title: "Commonly used data types DO NOT include:",
-        choices: ["strings", "booleans", "alerts", "numbers"],
-        answer: "2"
+        choices: ["1. strings", "2. booleans", "3. alerts", "4. numbers"],
+        answer: "1"
     },
     {
         title: "The condition in an if / else statement is enclosed within ____.",
-        choices: ["quotes", "curly brackets", "parentheses", "square brackets"],
-        answer: "parenthese2"
+        choices: ["1. quotes", "2. curly brackets", "3. parentheses", "4. square brackets"],
+        answer: "2"
     },
     {
-        title: "",
-        choices: [],
-        answer: ""
+        title: "Commonly used html tags DO NOT include:",
+        choices: ["1. body", "2. div", "3. span", "4. code"],
+        answer: "3"
     },
     {
-        title: "",
-        choices: [],
-        answer: ""
+        title: "Web development code that is often called the framework of a webpage",
+        choices: ["1. html", "2. hunter", "3. framework", "4. structure"],
+        answer: "0"
     },
     {
-        title: "",
-        choices: [],
-        answer: ""
+        title: "Which is used to randomize using a loop?",
+        choices: ["1. math.random", "2. random.it", "3.math.it", "4. random.math"],
+        answer: "0"
     },
     {
-        title: "",
-        choices: [],
-        answer: ""
+        title: "What is the function that logs an event to the console?",
+        choices: ["1. function(log)", "2. console.log()", "3. log(it)", "4. function.log()"],
+        answer: "1"
     },
     {
-        title: "",
-        choices: [],
-        answer: ""
+        title: "Which is NOT a type of event listener?",
+        choices: ["1. click", "2. mouseup", "3. highlight", "4. mousedown"],
+        answer: "2"
     },
     {
-        title: "",
-        choices: [],
-        answer: ""
+        title: "What is NOT a way to set a variable?",
+        choices: ["1. set", "2. var", "3. const", "4. let"],
+        answer: "0"
     },
 ];
 var button1 = document.querySelector("#button1");
-var nextQuestion = 0;
-var time;
+var nextQuestion = -1;
+var timeEl = 75;
+var score = 100;
 var totalQuestions = questions.length;
 var title1 = document.querySelector(".question");
 var answer1 = document.querySelector(".answer1");
@@ -60,72 +61,78 @@ function start() {
         buttonArrays[i].addEventListener("click", answerClick);
     }
 }
+
+
+
+
+
 function newQuestion() {
-    
-        title1.innerText = questions[nextQuestion].title;
-        answer1.innerText = questions[nextQuestion].choices[0];
-        answer2.innerText = questions[nextQuestion].choices[1];
-        answer3.innerText = questions[nextQuestion].choices[2];
-        answer4.innerText = questions[nextQuestion].choices[3];
-    
+    nextQuestion++;
+    title1.textContent = questions[nextQuestion].title;
+    answer1.textContent = questions[nextQuestion].choices[0];
+    answer2.textContent = questions[nextQuestion].choices[1];
+    answer3.textContent = questions[nextQuestion].choices[2];
+    answer4.textContent = questions[nextQuestion].choices[3];
+
 
 }
 
 function startbuttonclick() {
-    questionContainer.classList.remove('hidden');
+    event.preventDefault();
+    questioncontainer.classList.remove('hidden');
     startbutton.classList.add('hidden');
+    newQuestion();
+    setTime();
 }
     function answerClick(event) {
-        console.log(this);
-        nextQuestion++;
-        // var value = event
-        // if (value !== questions.answer.value){
-        //     alert("Incorrect");
-        // } else{
+        event.preventDefault();
+        console.log(this.id);
+        console.log(questions[nextQuestion].answer);
+        if (questions[nextQuestion].answer !== this.id){
+            
+            timeEl = timeEl-3;
+            score= score - 5;
+            console.log(time);
+            incorrect.textContent="INCORRECT";
+            
+        
+        } else{
+            incorrect.textContent="";
         newQuestion();
     }
-
-
+    
+    }
 
     start();
     
+    
+
+var time = document.querySelector("#time");
 
 
 
+function setTime() {
+    
+  var timerInterval = setInterval(function() {
+    timeEl--;
+    time.textContent =" TIME LEFT: " + timeEl;
+console.log(timeEl);
+    if(timeEl === 0) {
+        timeEl = 0;
+        score = score - 50;
+      clearInterval(timerInterval);
+      done();
+    }
 
+  }, 1000);
+}
 
-
-//   if answer correct move on to the next question
-// otherwise deduct time and alert "incorrect -seconds"
-
-
-// TIME INTERVAL
-// var timeEl = document.querySelector(".time");
-// var mainEl = document.getElementById("main");
-
-// var secondsLeft = 10;
-
-// function setTime() {
-//   var timerInterval = setInterval(function() {
-//     secondsLeft--;
-//     timeEl.textContent = secondsLeft + " seconds left till colorsplosion.";
-
-//     if(secondsLeft === 0) {
-//       clearInterval(timerInterval);
-//       sendMessage();
-//     }
-
-//   }, 1000);
-// }
-
-// function sendMessage() {
-//   timeEl.textContent = " ";
-
-//   var imgEl = document.createElement("img");
-
-//   imgEl.setAttribute("src", "images/image_1.jpg");
-//   mainEl.appendChild(imgEl);
-
-// }
-
-// setTime();
+function done(){
+   
+    if(timeEl === 0 || score == 90){
+        questioncontainer.classList.add('hidden');
+        finishcontainer.classList.remove('hidden');
+        document.getElementById("endScore").textContent = score;
+        console.log(score);
+        }
+}
