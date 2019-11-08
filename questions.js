@@ -45,7 +45,7 @@ var questions = [
 var button1 = document.querySelector("#button1");
 var nextQuestion = -1;
 var counter = 0;
-var timeEl = 75;
+var timeEl = 10;
 var score = 100;
 var totalQuestions = questions.length;
 var title1 = document.querySelector(".question");
@@ -55,7 +55,7 @@ var answer3 = document.querySelector(".answer3");
 var answer4 = document.querySelector(".answer4");
 var questionContainer = document.querySelector("#questioncontainer");
 var startbutton = document.querySelector("#startbutton");
-
+var timerInterval;
 
 function start() {
     button1.addEventListener("click", startbuttonclick);
@@ -76,6 +76,7 @@ function newQuestion() {
     answer3.textContent = questions[nextQuestion].choices[2];
     answer4.textContent = questions[nextQuestion].choices[3];
     counter++;
+    
     }
 
 
@@ -85,6 +86,8 @@ function startbuttonclick() {
     startbutton.classList.add('hidden');
     newQuestion();
     setTime();
+    
+
 }
 
 function answerClick(event) {
@@ -101,10 +104,12 @@ function answerClick(event) {
     } else {
         incorrect.textContent = "";
         if(counter !== questions.length){
-            console.log("Nextquestion = " + counter);
+            
     newQuestion();
     } else {
         done();
+        clearInterval(timerInterval);
+        console.log(timeEl);
     }
     }
 }
@@ -115,16 +120,15 @@ start();
 var time = document.querySelector("#time");
 
 function setTime() {
-    var timerInterval = setInterval(function () {
+        timerInterval = setInterval(function () {
         timeEl--;
         time.textContent = " TIME LEFT: " + timeEl;
         console.log(timeEl);
-        if (timeEl === 0) {
+        if (timeEl <= 0) {
             score = score - 50;
             clearInterval(timerInterval);
             done();
         }
-
     }, 1000);
 }
 
@@ -132,7 +136,8 @@ function done() {
     questioncontainer.classList.add('hidden');
     finishcontainer.classList.remove('hidden');
     document.getElementById("endScore").textContent = score;
-    clearInterval(timerInterval);
+    
     console.log(score);
+
 
 }

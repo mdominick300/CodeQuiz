@@ -44,3 +44,13 @@ h1 {
 #time{
     font-size: 30px;
 }
+#endScore{
+    font-size: 30px;
+}
+#submit{
+    background: rgb(89, 89, 255);
+    padding: 5px;
+    color: white;
+    margin-left: 5px;
+
+}
