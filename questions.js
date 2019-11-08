@@ -39,9 +39,12 @@ var questions = [
         choices: ["1. set", "2. var", "3. const", "4. let"],
         answer: "0"
     },
+
 ];
+
 var button1 = document.querySelector("#button1");
 var nextQuestion = -1;
+var counter = 0;
 var timeEl = 75;
 var score = 100;
 var totalQuestions = questions.length;
@@ -60,22 +63,21 @@ function start() {
     for (var i = 0; i < buttonArrays.length; i++) {
         buttonArrays[i].addEventListener("click", answerClick);
     }
+
 }
 
 
-
-
-
 function newQuestion() {
+    
     nextQuestion++;
     title1.textContent = questions[nextQuestion].title;
     answer1.textContent = questions[nextQuestion].choices[0];
     answer2.textContent = questions[nextQuestion].choices[1];
     answer3.textContent = questions[nextQuestion].choices[2];
     answer4.textContent = questions[nextQuestion].choices[3];
+    counter++;
+    }
 
-
-}
 
 function startbuttonclick() {
     event.preventDefault();
@@ -84,55 +86,53 @@ function startbuttonclick() {
     newQuestion();
     setTime();
 }
-    function answerClick(event) {
-        event.preventDefault();
-        console.log(this.id);
-        console.log(questions[nextQuestion].answer);
-        if (questions[nextQuestion].answer !== this.id){
-            
-            timeEl = timeEl-3;
-            score= score - 5;
-            console.log(time);
-            incorrect.textContent="INCORRECT";
-            
-        
-        } else{
-            incorrect.textContent="";
-        newQuestion();
-    }
-    
-    }
 
-    start();
-    
-    
+function answerClick(event) {
+    event.preventDefault();
+    console.log(this.id);
+    console.log(questions[nextQuestion].answer);
+    if (questions[nextQuestion].answer !== this.id) {
+
+        timeEl = timeEl - 3;
+        score = score - 5;
+        console.log(time);
+        incorrect.textContent = "INCORRECT";
+
+    } else {
+        incorrect.textContent = "";
+        if(counter !== questions.length){
+            console.log("Nextquestion = " + counter);
+    newQuestion();
+    } else {
+        done();
+    }
+    }
+}
+start();
+
+
 
 var time = document.querySelector("#time");
 
-
-
 function setTime() {
-    
-  var timerInterval = setInterval(function() {
-    timeEl--;
-    time.textContent =" TIME LEFT: " + timeEl;
-console.log(timeEl);
-    if(timeEl === 0) {
-        timeEl = 0;
-        score = score - 50;
-      clearInterval(timerInterval);
-      done();
-    }
+    var timerInterval = setInterval(function () {
+        timeEl--;
+        time.textContent = " TIME LEFT: " + timeEl;
+        console.log(timeEl);
+        if (timeEl === 0) {
+            score = score - 50;
+            clearInterval(timerInterval);
+            done();
+        }
 
-  }, 1000);
+    }, 1000);
 }
 
-function done(){
-   
-    if(timeEl === 0 || score == 90){
-        questioncontainer.classList.add('hidden');
-        finishcontainer.classList.remove('hidden');
-        document.getElementById("endScore").textContent = score;
-        console.log(score);
-        }
+function done() {
+    questioncontainer.classList.add('hidden');
+    finishcontainer.classList.remove('hidden');
+    document.getElementById("endScore").textContent = score;
+    clearInterval(timerInterval);
+    console.log(score);
+
 }
