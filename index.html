@@ -56,21 +56,46 @@
     </div>
     <div class="container hidden" id="finishcontainer">
         <div class="row">
-            <div id="time" class="col-md-2"></div>
+            <div id="time" class="col-md-2">
+
+            </div>
             <div class="col-md-8 box">
                 <br>
                 <h1>Score: </h1>
                 <p id="endScore"></p>
                 <p>Enter Your Initials for the Record Book</p>
-                <form id="" method="POST">
-                    <label for=""></label>
-                    <input type="text" placeholder="Initials" name="" id="" />
+                <form id="score-form" method="POST">
+                    <label for="score-text"></label>
+                    <input type="text" placeholder="Initials" name="score-text" id="score-text" />
                     <button id="submit">Submit</button>
                 </form>
+                <p><span id="todo-count"></span></p>
             </div>
             <div class="col-md-2"></div>
         </div>
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8 hScores">
+                <h3>High Scores</h3>
+                <ul id="score-list"></ul>
+            </div>
+            <div class="col-md-2"></div>
 
+        </div>
+
+    </div>
+    <div class="container hidden" id="highscorescontainer">
+        <div class="row">
+            <div id="time" class="col-md-2">
+
+            </div>
+            <div class="col-md-8 box" id="score-form">
+                <h3>High Scores</h3>
+                <ul id="score-list"></ul>
+                <button id="retake">Retake Quiz</button>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
     </div>
     <script src="./questions.js"></script>
 </body>

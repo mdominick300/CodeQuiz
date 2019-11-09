@@ -55,7 +55,9 @@ var answer3 = document.querySelector(".answer3");
 var answer4 = document.querySelector(".answer4");
 var questionContainer = document.querySelector("#questioncontainer");
 var startbutton = document.querySelector("#startbutton");
+// var retake = document.querySelector("#highscorecontainer");
 var timerInterval;
+var retake = document.querySelector("#retake");
 
 function start() {
     button1.addEventListener("click", startbuttonclick);
@@ -66,6 +68,18 @@ function start() {
 
 }
 
+function retakeQuiz() {
+    retake.addEventListener("click", retakeButtonClick);
+}
+
+function retakeButtonClick(){
+    event.preventDefault();
+    questioncontainer.classList.remove('hidden');
+    highscorescontainer.classList.add('hidden');
+    newQuestion();
+    setTime();
+    
+}
 
 function newQuestion() {
     
@@ -89,6 +103,13 @@ function startbuttonclick() {
     
 
 }
+
+function highScores(){
+    highscorescontainer.classList.remove('hidden');
+    finishcontainer.classList.add('hidden');
+}
+
+
 
 function answerClick(event) {
     event.preventDefault();
@@ -141,3 +162,74 @@ function done() {
 
 
 }
+
+var scoreForm = document.querySelector("#score-form");
+var scoreText = document.querySelector("#score-text");
+var scoreList = document.querySelector("#score-list");
+var scoreCountSpan = document.querySelector("#todo-count");
+
+var todos = [];
+var todo =  [];
+var li = [];
+
+function renderTodos() {
+    // Clear scoreList element and update todoCountSpan
+    scoreList.innerHTML = "";
+    scoreCountSpan.textContent = todos.length;
+  
+    // Render a new li for each todo
+    for (var i = 0; i < todos.length; i++) {
+      todo = todos[i];
+  
+      li = document.createElement("li");
+      li.textContent = todo+ " : " + score;
+      li.setAttribute("data-index", i);
+
+  
+      
+      scoreList.appendChild(li);
+    }
+  }
+  var storedTodos= 0;
+  var todoText = 0;
+
+  function init() {
+    // Get stored todos from localStorage
+    // Parsing the JSON string to an object
+    storedTodos = JSON.parse(localStorage.getItem("todos"));
+  
+    // If todos were retrieved from localStorage, update the todos array to it
+    if (storedTodos !== null) {
+      todos = storedTodos;
+    }
+  
+    // Render todos to the DOM
+    renderTodos();
+  }
+  
+  function storeTodos() {
+    // Stringify and set "todos" key in localStorage to todos array
+    localStorage.setItem("todos", JSON.stringify(todos));
+  }
+  
+  // When form is submitted...
+  scoreForm.addEventListener("submit", function(event) {
+    event.preventDefault();
+  
+    todoText = scoreText.value.trim();
+  
+    // Return from function early if submitted todoText is blank
+    if (todoText === "") {
+      return;
+    }
+  
+    // Add new todoText to todos array, clear the input
+    todos.push(todoText);
+    scoreText.value = "";
+  
+    // Store updated todos in localStorage, re-render the list
+    storeTodos();
+    renderTodos();
+    highScores();
+  });
+  
