@@ -57,27 +57,28 @@ var questionContainer = document.querySelector("#questioncontainer");
 var startbutton = document.querySelector("#startbutton");
 // var retake = document.querySelector("#highscorecontainer");
 var timerInterval;
-var retake = document.querySelector("#retake");
+var retake = document.querySelector("#retake1");
+var highscoresContainer = document.querySelector("#highscorescontainer")
 
 function start() {
     button1.addEventListener("click", startbuttonclick);
     var buttonArrays = document.querySelectorAll(".answerB");
     for (var i = 0; i < buttonArrays.length; i++) {
-        buttonArrays[i].addEventListener("click", answerClick);
+        buttonArrays[i].addEventListener("click", answerClick);  
     }
-
 }
 
 function retakeQuiz() {
-    retake.addEventListener("click", retakeButtonClick);
+    event.preventDefault();
 }
 
 function retakeButtonClick(){
     event.preventDefault();
     questioncontainer.classList.remove('hidden');
-    highscorescontainer.classList.add('hidden');
-    newQuestion();
-    setTime();
+    highscoresContainer.classList.add('hidden');
+    // newQuestion();
+    // setTime();
+
     
 }
 
@@ -105,8 +106,9 @@ function startbuttonclick() {
 }
 
 function highScores(){
-    highscorescontainer.classList.remove('hidden');
+    highscoresContainer.classList.remove('hidden');
     finishcontainer.classList.add('hidden');
+    renderTodos();
 }
 
 
@@ -170,9 +172,10 @@ var scoreCountSpan = document.querySelector("#todo-count");
 
 var todos = [];
 var todo =  [];
-var li = [];
-
+var li ;
+var ul ;
 function renderTodos() {
+    console.log(todos);
     // Clear scoreList element and update todoCountSpan
     scoreList.innerHTML = "";
     scoreCountSpan.textContent = todos.length;
@@ -180,16 +183,18 @@ function renderTodos() {
     // Render a new li for each todo
     for (var i = 0; i < todos.length; i++) {
       todo = todos[i];
-  
+    ul = document.createElement("ul");
+    scoreList.appendChild(ul);
       li = document.createElement("li");
       li.textContent = todo+ " : " + score;
       li.setAttribute("data-index", i);
 
-  
-      
-      scoreList.appendChild(li);
+      ul.appendChild(li);
+      console.log(li);
+      console.log(scoreList);
     }
   }
+
   var storedTodos= 0;
   var todoText = 0;
 
@@ -232,4 +237,4 @@ function renderTodos() {
     renderTodos();
     highScores();
   });
-  
+  retake.addEventListener("click", retakeButtonClick);
