@@ -74,10 +74,11 @@ function retakeQuiz() {
 
 function retakeButtonClick(){
     event.preventDefault();
+    timeEl= 10;
+    score= 100;
     questioncontainer.classList.remove('hidden');
     highscoresContainer.classList.add('hidden');
-    // newQuestion();
-    // setTime();
+    setTime();
 
     
 }
@@ -109,6 +110,7 @@ function highScores(){
     highscoresContainer.classList.remove('hidden');
     finishcontainer.classList.add('hidden');
     renderTodos();
+    
 }
 
 
@@ -175,37 +177,37 @@ var todo =  [];
 var li ;
 var ul ;
 function renderTodos() {
-    console.log(todos);
-    // Clear scoreList element and update todoCountSpan
-    scoreList.innerHTML = "";
-    scoreCountSpan.textContent = todos.length;
-  
-    // Render a new li for each todo
-    for (var i = 0; i < todos.length; i++) {
-      todo = todos[i];
-    ul = document.createElement("ul");
-    scoreList.appendChild(ul);
-      li = document.createElement("li");
-      li.textContent = todo+ " : " + score;
-      li.setAttribute("data-index", i);
 
-      ul.appendChild(li);
-      console.log(li);
-      console.log(scoreList);
+    scoreList.innerHTML =  "";
+    var newList = document.createElement("ul");
+
+    for (let i = 0; i < todos.length; i++) {
+        var newItem = document.createElement("li");
+        const scoreItem = todos[i];
+        newItem.innerHTML = scoreItem.name + " " + scoreItem.value
+        newList.appendChild(newItem);
     }
+
+    scoreList.appendChild(newList)
   }
 
   var storedTodos= 0;
   var todoText = 0;
+  var storedScore = 0;
+  var storedText = 0;
+  
+
 
   function init() {
     // Get stored todos from localStorage
     // Parsing the JSON string to an object
     storedTodos = JSON.parse(localStorage.getItem("todos"));
+    storedScore= JSON.parse(localStorage.getItem("score"));
   
     // If todos were retrieved from localStorage, update the todos array to it
     if (storedTodos !== null) {
       todos = storedTodos;
+      score = storedScore;
     }
   
     // Render todos to the DOM
@@ -215,6 +217,7 @@ function renderTodos() {
   function storeTodos() {
     // Stringify and set "todos" key in localStorage to todos array
     localStorage.setItem("todos", JSON.stringify(todos));
+    localStorage.setItem("storedScore",JSON.stringify(score));
   }
   
   // When form is submitted...
@@ -222,19 +225,25 @@ function renderTodos() {
     event.preventDefault();
   
     todoText = scoreText.value.trim();
+    
+
   
     // Return from function early if submitted todoText is blank
     if (todoText === "") {
       return;
     }
+
+    var scoreObj = {
+        name: todoText,
+        value: score
+    }
   
     // Add new todoText to todos array, clear the input
-    todos.push(todoText);
+    todos.push(scoreObj);
     scoreText.value = "";
   
     // Store updated todos in localStorage, re-render the list
     storeTodos();
-    renderTodos();
     highScores();
   });
   retake.addEventListener("click", retakeButtonClick);
