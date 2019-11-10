@@ -45,7 +45,7 @@ var questions = [
 var button1 = document.querySelector("#button1");
 var nextQuestion = -1;
 var counter = 0;
-var timeEl = 10;
+var timeEl = 60;
 var score = 100;
 var totalQuestions = questions.length;
 var title1 = document.querySelector(".question");
@@ -74,7 +74,7 @@ function retakeQuiz() {
 
 function retakeButtonClick(){
     event.preventDefault();
-    timeEl= 10;
+    timeEl= 60;
     score= 100;
     questioncontainer.classList.remove('hidden');
     highscoresContainer.classList.add('hidden');
@@ -154,6 +154,11 @@ function setTime() {
             clearInterval(timerInterval);
             done();
         }
+        if (timeEl < 10){
+            time.style.fontSize = "50px";
+            time.style.color ="red";
+
+        }
     }, 1000);
 }
 
@@ -196,23 +201,6 @@ function renderTodos() {
   var storedScore = 0;
   var storedText = 0;
   
-
-
-  function init() {
-    // Get stored todos from localStorage
-    // Parsing the JSON string to an object
-    storedTodos = JSON.parse(localStorage.getItem("todos"));
-    storedScore= JSON.parse(localStorage.getItem("score"));
-  
-    // If todos were retrieved from localStorage, update the todos array to it
-    if (storedTodos !== null) {
-      todos = storedTodos;
-      score = storedScore;
-    }
-  
-    // Render todos to the DOM
-    renderTodos();
-  }
   
   function storeTodos() {
     // Stringify and set "todos" key in localStorage to todos array

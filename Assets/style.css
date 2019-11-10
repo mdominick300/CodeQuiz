@@ -1,5 +1,5 @@
 .box {
-    margin-top: 100px;
+    /* margin-top: 100px; */
     padding: 0 40px 40px 40px;
     text-align: center;
     border: solid 2px  rgb(89, 89, 255);
@@ -8,6 +8,7 @@
     width: 100%;
     clear: both;
     height: 400px;
+    background: rgb(213, 213, 255);
 
 }
 .hScores {
@@ -52,6 +53,8 @@ h1 {
 
 #time{
     font-size: 30px;
+    height: 100px;
+    text-align: center;
 }
 #endScore{
     font-size: 30px;
@@ -68,4 +71,9 @@ h1 {
     color: white;
     padding: 10px;
     margin-top:100px;
+}
+#holdHeader{
+    font-size: 30px;
+    height: 100px;
+    text-align: center;
 }
