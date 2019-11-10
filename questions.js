@@ -15,7 +15,7 @@ var questions = [
         answer: "3"
     },
     {
-        title: "Web development code that is often called the framework of a webpage",
+        title: "Web development code that is often called the frame/structure of a webpage",
         choices: ["1. html", "2. hunter", "3. framework", "4. structure"],
         answer: "0"
     },
@@ -183,7 +183,7 @@ var li ;
 var ul ;
 function renderTodos() {
 
-    scoreList.innerHTML =  "";
+    scoreList.innerHTML ="";
     var newList = document.createElement("ul");
 
     for (let i = 0; i < todos.length; i++) {
