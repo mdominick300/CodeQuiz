@@ -60,6 +60,8 @@ var timerInterval;
 var retake = document.querySelector("#retake1");
 var highscoresContainer = document.querySelector("#highscorescontainer")
 
+
+ 
 function start() {
     button1.addEventListener("click", startbuttonclick);
     var buttonArrays = document.querySelectorAll(".answerB");
@@ -86,6 +88,7 @@ function retakeButtonClick(){
 
     questioncontainer.classList.remove('hidden');
     highscoresContainer.classList.add('hidden'); 
+    init();
     setTime();
     nextQuestion();
 
@@ -175,7 +178,7 @@ function done() {
     questioncontainer.classList.add('hidden');
     finishcontainer.classList.remove('hidden');
     document.getElementById("endScore").textContent = score;
-    
+    init();
     console.log(score);
 
 
@@ -192,7 +195,7 @@ var li ;
 var ul ;
 function renderTodos() {
 
-    scoreList.innerHTML ="";
+    scoreList.innerHTML = "";
     var newList = document.createElement("ul");
 
     for (let i = 0; i < todos.length; i++) {
@@ -243,4 +246,24 @@ function renderTodos() {
     storeTodos();
     highScores();
   });
+
+  function init() {
+    // Get stored todos from localStorage
+    // Parsing the JSON string to an object
+    var scoreItems = JSON.parse(localStorage.getItem("todos"));
+  
+    // If todos were retrieved from localStorage, update the todos array to it
+    if (scoreItems !== null) {
+      todos = scoreItems;
+    }
+  
+    // Render todos to the DOM
+    renderTodos();
+  }
+  
+  function storeTodos() {
+    // Stringify and set "todos" key in localStorage to todos array
+    localStorage.setItem("todos", JSON.stringify(todos));
+  }
+
   retake.addEventListener("click", retakeButtonClick);
