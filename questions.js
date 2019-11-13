@@ -76,11 +76,20 @@ function retakeButtonClick(){
     event.preventDefault();
     timeEl= 60;
     score= 100;
-    questioncontainer.classList.remove('hidden');
-    highscoresContainer.classList.add('hidden');
-    setTime();
+    nextQuestion= 0;
+    counter= 0;
+    title1.textContent = questions[0].title;
+    answer1.textContent = questions[0].choices[0];
+    answer2.textContent = questions[0].choices[1];
+    answer3.textContent = questions[0].choices[2];
+    answer4.textContent = questions[0].choices[3];
 
-    
+    questioncontainer.classList.remove('hidden');
+    highscoresContainer.classList.add('hidden'); 
+    setTime();
+    nextQuestion();
+
+  
 }
 
 function newQuestion() {
