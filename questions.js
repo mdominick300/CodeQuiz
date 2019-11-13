@@ -77,7 +77,7 @@ function retakeButtonClick(){
     timeEl= 60;
     score= 100;
     nextQuestion= 0;
-    counter= 0;
+    counter= 1;
     title1.textContent = questions[0].title;
     answer1.textContent = questions[0].choices[0];
     answer2.textContent = questions[0].choices[1];
